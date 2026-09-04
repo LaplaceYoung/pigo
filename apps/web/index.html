@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pigo — keep the plate, pick the bricks</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Syne:wght@500;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./styles.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+          "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div class="app">
+      <header class="top">
+        <div class="brand">
+          <span class="mark">π</span>
+          <div>
+            <strong>pigo</strong>
+            <em>keep the plate · pick the bricks · print the build</em>
+          </div>
+        </div>
+        <nav>
+          <button class="ghost" id="btn-presets">Presets</button>
+          <button class="ghost" id="btn-reset">Clear plate</button>
+          <a class="ghost" href="https://github.com/LaplaceYoung/pigo" target="_blank" rel="noreferrer">Repo</a>
+        </nav>
+      </header>
+      <aside class="crate">
+        <div class="crate-head">
+          <h2>Brick crate</h2>
+          <p>OMP 拆开的能力 + Pi 社区精选包。底座锁死为官方 Pi。</p>
+          <input id="filter" type="search" placeholder="Search bricks…" />
+        </div>
+        <div id="cats" class="cats"></div>
+        <div id="crate-list" class="crate-list"></div>
+      </aside>
+      <section class="stage">
+        <canvas id="stage"></canvas>
+        <div class="stage-caption">
+          <span class="plate-tag">NAMEPLATE</span>
+          <strong>pi</strong>
+          <small id="build-count">core plate only</small>
+        </div>
+      </section>
+      <aside class="tray">
+        <div class="tray-head">
+          <h2>Build tray</h2>
+          <p id="compat-line">No conflicts.</p>
+        </div>
+        <ol id="selected-list" class="selected-list"></ol>
+        <label class="intent">
+          What should this agent be good at?
+          <textarea id="intent" rows="3" placeholder="Example: local-first TypeScript refactor agent with LSP, review, and MCP docs lookup."></textarea>
+        </label>
+        <details class="byok">
+          <summary>BYOK · optional polish</summary>
+          <p>Key stays in this browser. Composer rules still come from the brick ledger.</p>
+          <select id="provider">
+            <option value="none">Skip — use local composer</option>
+            <option value="openai">OpenAI compatible</option>
+            <option value="anthropic">Anthropic</option>
+            <option value="openrouter">OpenRouter</option>
+            <option value="xai">xAI</option>
+          </select>
+          <input id="base-url" type="url" placeholder="Base URL (optional override)" />
+          <input id="model" type="text" placeholder="Model id" />
+          <input id="api-key" type="password" placeholder="API key" autocomplete="off" />
+        </details>
+        <div class="actions">
+          <button class="primary" id="btn-goal">Print goal.md</button>
+          <button class="ghost" id="btn-json">build.json</button>
+        </div>
+      </aside>
+    </div>
+    <div id="modal" class="modal hidden" role="dialog">
+      <div class="sheet">
+        <header>
+          <h3>goal.md</h3>
+          <div>
+            <button class="ghost" id="btn-copy">Copy</button>
+            <button class="ghost" id="btn-download">Download</button>
+            <button class="ghost" id="btn-close">Close</button>
+          </div>
+        </header>
+        <pre id="goal-out"></pre>
+      </div>
+    </div>
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>
