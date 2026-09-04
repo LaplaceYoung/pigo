@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.4.0 — community crate
+
+- Curated 12 community bricks from the live Pi package catalog and GitHub extension monorepos.
+- New slots: pack-mgr, saas-apps, claude-compat, intercom, file-nav, sec-audit, remote, session-kit, crawl, sidequest, telemetry.
+- `pi-agent-browser` is a first-class browser brick; the MCP chrome-devtools path remains as the original `browser` brick (same slot).
+- Presets: Community daily, Connected stack.
+- README documents why each community brick earned a stud.
+
 ## 0.3.0 — bench that actually ships
 
 - Curated crate + opt-in npm market stay, but the GitHub Pages tree now includes the JS bench (`main.js`, `scene.js`, `compose.js`).
