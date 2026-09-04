@@ -17,9 +17,9 @@ Keep the plate. Pick the bricks. Print the build.
 1. User opens the bench.
 2. Center stage shows a studded plate with a nameplate `pi`.
 3. The crate on the left holds OMP-split capabilities and curated community packages.
-4. Clicking a brick snaps it onto the plate. Same-slot bricks bounce off.
-5. User states intent, optionally pastes a BYOK key.
-6. Composer emits `goal.md` + `build.json`.
+4. Clicking a brick snaps it onto the plate. Same-slot bricks bounce; a second click replaces the occupant.
+5. User states intent, optionally pastes a BYOK key. The current build is encoded in the URL hash.
+6. Composer emits `goal.md` + `build.json` + a merge-only settings fragment.
 7. User sends `goal.md` to their own coding agent. That agent installs Pi packages / writes local extensions.
 
 ## Non-goals
@@ -33,12 +33,27 @@ Keep the plate. Pick the bricks. Print the build.
 
 See `packages/catalog/bricks.json` and `docs/BRICK-LEDGER.md`.
 
-Each brick maps one capability slot to one install recipe.
+Each brick maps one capability slot to one install recipe:
+
+| Field | Meaning |
+|---|---|
+| slot | Exclusive socket on the plate |
+| source | `omp-split` or `marketplace` |
+| maturity | `community` / `local-extension` / `partial` / `settings` |
+| install | `pi install …` or `local:extensions/….ts` |
+| conflictsWith | Other brick ids that cannot coexist |
+| contextCost | Prompt / tool-schema weight |
 
 ## Composer
 
 `packages/composer/compose.js` is the source of truth for install order and conflicts.
 BYOK may rewrite prose. It may not invent packages.
+
+Supported BYOK shapes (browser-only):
+
+- OpenAI-compatible `/v1/chat/completions`
+- Anthropic `/v1/messages`
+- OpenRouter / xAI compatible base URLs
 
 ## Trademark
 

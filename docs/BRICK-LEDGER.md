@@ -34,3 +34,21 @@ Capability slots on the official Pi plate. One brick per slot.
 
 Installing `oh-my-pi` / `omp` as the runtime. That replaces the plate.
 Family bundles (`pi-code`, `pi-maestro-flow`, `omni-pi`) that secretly stack half the crate.
+
+## Market crate policy
+
+Live search uses `https://registry.npmjs.org/-/v1/search?text=keywords:pi-package`.
+Default crate only shows curated bricks above. Marketplace hits must map to an existing slot or stay in the "unsorted" bin and cannot snap until reviewed.
+
+## Local recipe files
+
+| Brick id | File |
+|---|---|
+| ast-grep | `packages/recipes/ast-grep/index.ts` |
+| dap-debug | `packages/recipes/dap-debug/index.ts` |
+| eval-kernel | `packages/recipes/eval-kernel/index.ts` |
+| stream-rules | `packages/recipes/stream-rules/index.ts` |
+| github-fs | `packages/recipes/github-fs/index.ts` |
+| computer-use | `packages/recipes/computer-use/index.ts` |
+| rule-compat | `packages/recipes/rule-compat/index.ts` |
+| role-routing | `packages/recipes/role-routing/index.ts` |
