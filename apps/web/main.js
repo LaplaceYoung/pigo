@@ -100,3 +100,35 @@ function visibleBricks() {
     return catOk && (!q || text.includes(q));
   });
 }
+
+function paintCrate() {
+  const list = $("crate-list");
+  list.innerHTML = "";
+  const colors = Object.fromEntries(state.catalog.categories.map((c) => [c.id, c.color]));
+
+  const core = document.createElement("button");
+  core.className = "brick-card locked on";
+  core.innerHTML = `<span class="swatch" style="background:#111"></span><span><b>Pi Core</b><small>locked plate · read/write/edit/bash</small></span><span class="meta">BASE</span>`;
+  list.appendChild(core);
+
+  if (state.source === "market" && state.marketStatus) {
+    const note = document.createElement("p");
+    note.className = "hint";
+    note.textContent = state.marketStatus;
+    list.appendChild(note);
+  }
+
+  for (const brick of visibleBricks()) {
+    brick.color = brick.color || colors[brick.category] || "#7B5CFF";
+    const on = state.selected.includes(brick.id);
+    const el = document.createElement("button");
+    el.className = "brick-card" + (on ? " on" : "") + (brick.source === "marketplace-live" ? " market" : "");
+    const badge = brick.source === "omp-split" ? "OMP" : brick.source === "marketplace-live" ? "NPM" : "MKT";
+    el.innerHTML = `<span class="swatch" style="background:${brick.color}"></span><span><b>${brick.nameZh || brick.name}</b><small>${brick.name} · ${brick.maturity} · slot ${brick.slot}</small></span><span class="meta">${badge}</span>`;
+    el.onclick = () => {
+      state.detailId = brick.id;
+      toggle(brick);
+    };
+    list.appendChild(el);
+  }
+}
