@@ -1,0 +1,358 @@
+{
+  "version": 1,
+  "plate": {
+    "id": "pi-core",
+    "name": "pi",
+    "slot": "plate",
+    "locked": true,
+    "color": "#D7C4A3",
+    "summary": "Official Pi plate. read / write / edit / bash stay put.",
+    "install": {
+      "kind": "builtin",
+      "command": "npm i -g @earendil-works/pi-coding-agent"
+    }
+  },
+  "blacklist": ["oh-my-pi", "omp", "@oh-my-pi/"],
+  "categories": [
+    { "id": "edit", "label": "Edit & intel" },
+    { "id": "runtime", "label": "Runtime" },
+    { "id": "coord", "label": "Coordination" },
+    { "id": "reach", "label": "Reach" },
+    { "id": "memory", "label": "Memory & jobs" },
+    { "id": "guard", "label": "Guardrails" },
+    { "id": "surface", "label": "Surface" }
+  ],
+  "presets": [
+    {
+      "id": "daily-refactor",
+      "name": "Daily refactor",
+      "intent": "日常 TypeScript / Python 重构：要 LSP、稳编辑、能查文档，并挡住危险命令。",
+      "bricks": ["hashline-edit", "lsp-lens", "web-access", "mcp-adapter", "review", "permission-gate"]
+    },
+    {
+      "id": "debug-desktop",
+      "name": "Debug + desktop",
+      "intent": "需要 DAP 断点与受限的桌面操作，保留官方 Pi 底座。",
+      "bricks": ["dap-debug", "computer-use", "lsp-lens", "permission-gate"]
+    }
+  ],
+  "bricks": [
+    {
+      "id": "hashline-edit",
+      "name": "Hashline Edit",
+      "slot": "edit-format",
+      "category": "edit",
+      "origin": "omp",
+      "maturity": "community",
+      "color": "#C75B12",
+      "studs": [2, 1],
+      "summary": "Hash-anchored edits. Replaces sloppy whole-file rewrites.",
+      "install": { "kind": "npm", "package": "pi-hashline-edit-pro", "command": "pi install npm:pi-hashline-edit-pro" },
+      "settingsFragment": { "packages": ["npm:pi-hashline-edit-pro"] }
+    },
+    {
+      "id": "ast-grep",
+      "name": "AST Grep",
+      "slot": "ast",
+      "category": "edit",
+      "origin": "omp",
+      "maturity": "local-extension",
+      "color": "#2F6B4F",
+      "studs": [2, 1],
+      "summary": "Structural search/replace via ast-grep CLI wrapped as a tool.",
+      "install": { "kind": "local-extension", "command": "write .pi/extensions/ast-grep.ts", "recipe": "packages/recipes/ast-grep" },
+      "settingsFragment": { "extensions": [".pi/extensions/ast-grep.ts"] }
+    },
+    {
+      "id": "lsp-lens",
+      "name": "LSP Lens",
+      "slot": "lsp",
+      "category": "edit",
+      "origin": "community",
+      "maturity": "community",
+      "color": "#2B6CB0",
+      "studs": [2, 2],
+      "summary": "Diagnostics, navigation, and impact cascade from pi-lens.",
+      "install": { "kind": "npm", "package": "pi-lens", "command": "pi install npm:pi-lens" },
+      "settingsFragment": { "packages": ["npm:pi-lens"] }
+    },
+    {
+      "id": "dap-debug",
+      "name": "DAP Debug",
+      "slot": "debugger",
+      "category": "runtime",
+      "origin": "omp",
+      "maturity": "partial",
+      "color": "#9B2C2C",
+      "studs": [2, 2],
+      "summary": "One DAP session: launch/attach, breakpoints, step, stack, evaluate.",
+      "install": {
+        "kind": "local-extension",
+        "command": "mkdir -p .pi/extensions && cp packages/recipes/dap-debug/index.ts .pi/extensions/dap-debug.ts",
+        "recipe": "packages/recipes/dap-debug"
+      },
+      "files": ["packages/recipes/dap-debug/index.ts"],
+      "settingsFragment": { "extensions": [".pi/extensions/dap-debug.ts"] }
+    },
+    {
+      "id": "eval-kernel",
+      "name": "Eval Kernel",
+      "slot": "kernel",
+      "category": "runtime",
+      "origin": "omp",
+      "maturity": "local-extension",
+      "color": "#6B46C1",
+      "studs": [2, 1],
+      "summary": "Persistent JS/Python eval via a local child process, not omp kernels.",
+      "install": { "kind": "local-extension", "command": "write .pi/extensions/eval-kernel.ts" },
+      "settingsFragment": { "extensions": [".pi/extensions/eval-kernel.ts"] }
+    },
+    {
+      "id": "subagents",
+      "name": "Subagents",
+      "slot": "subagents",
+      "category": "coord",
+      "origin": "community",
+      "maturity": "community",
+      "color": "#B7791F",
+      "studs": [2, 2],
+      "summary": "Delegate work to child Pi sessions.",
+      "install": { "kind": "npm", "package": "pi-subagents", "command": "pi install npm:pi-subagents" },
+      "settingsFragment": { "packages": ["npm:pi-subagents"] }
+    },
+    {
+      "id": "plan-goal",
+      "name": "Plan Mode",
+      "slot": "plan",
+      "category": "coord",
+      "origin": "community",
+      "maturity": "community",
+      "color": "#2C7A7B",
+      "studs": [2, 1],
+      "summary": "Plan-then-build slash flow.",
+      "install": { "kind": "npm", "package": "@narumitw/pi-plan-mode", "command": "pi install npm:@narumitw/pi-plan-mode" },
+      "settingsFragment": { "packages": ["npm:@narumitw/pi-plan-mode"] }
+    },
+    {
+      "id": "todo-ask",
+      "name": "Todo / Ask",
+      "slot": "session-ops",
+      "category": "coord",
+      "origin": "community",
+      "maturity": "community",
+      "color": "#DD6B20",
+      "studs": [2, 1],
+      "summary": "Session todos and clarifying questions.",
+      "install": { "kind": "npm", "package": "@juicesharp/rpiv-todo", "command": "pi install npm:@juicesharp/rpiv-todo" },
+      "settingsFragment": { "packages": ["npm:@juicesharp/rpiv-todo"] }
+    },
+    {
+      "id": "review",
+      "name": "Code Review",
+      "slot": "review",
+      "category": "coord",
+      "origin": "community",
+      "maturity": "community",
+      "color": "#2B6CB0",
+      "studs": [2, 1],
+      "summary": "Interactive review / annotate for diffs and PRs.",
+      "install": { "kind": "npm", "package": "@plannotator/pi-extension", "command": "pi install npm:@plannotator/pi-extension" },
+      "settingsFragment": { "packages": ["npm:@plannotator/pi-extension"] }
+    },
+    {
+      "id": "stream-rules",
+      "name": "Stream Rules",
+      "slot": "steering",
+      "category": "coord",
+      "origin": "omp",
+      "maturity": "local-extension",
+      "color": "#4A5568",
+      "studs": [2, 1],
+      "summary": "Inject mid-stream reminders when the model drifts.",
+      "install": { "kind": "local-extension", "command": "write .pi/extensions/stream-rules.ts" },
+      "settingsFragment": { "extensions": [".pi/extensions/stream-rules.ts"] }
+    },
+    {
+      "id": "web-access",
+      "name": "Web Access",
+      "slot": "web",
+      "category": "reach",
+      "origin": "community",
+      "maturity": "community",
+      "color": "#3182CE",
+      "studs": [2, 2],
+      "summary": "Search, fetch URLs, clone repos, read PDFs.",
+      "install": { "kind": "npm", "package": "pi-web-access", "command": "pi install npm:pi-web-access" },
+      "settingsFragment": { "packages": ["npm:pi-web-access"] }
+    },
+    {
+      "id": "mcp-adapter",
+      "name": "MCP Adapter",
+      "slot": "mcp",
+      "category": "reach",
+      "origin": "community",
+      "maturity": "community",
+      "color": "#805AD5",
+      "studs": [2, 2],
+      "summary": "Lazy MCP host that does not dump every tool into context.",
+      "install": { "kind": "npm", "package": "pi-mcp-adapter", "command": "pi install npm:pi-mcp-adapter" },
+      "settingsFragment": { "packages": ["npm:pi-mcp-adapter"] }
+    },
+    {
+      "id": "browser",
+      "name": "Browser",
+      "slot": "browser",
+      "category": "reach",
+      "origin": "omp",
+      "maturity": "community",
+      "color": "#38A169",
+      "studs": [2, 2],
+      "summary": "Page automation through a community browser package, not omp Eval.",
+      "install": { "kind": "npm", "package": "pi-browser-debug", "command": "pi install npm:pi-browser-debug" },
+      "conflicts": ["computer-use"],
+      "settingsFragment": { "packages": ["npm:pi-browser-debug"] }
+    },
+    {
+      "id": "github-fs",
+      "name": "GitHub FS",
+      "slot": "github",
+      "category": "reach",
+      "origin": "omp",
+      "maturity": "local-extension",
+      "color": "#1A202C",
+      "studs": [2, 1],
+      "summary": "Read PRs and issues through gh, not a forked VFS.",
+      "install": { "kind": "local-extension", "command": "write .pi/extensions/github-fs.ts" },
+      "settingsFragment": { "extensions": [".pi/extensions/github-fs.ts"] }
+    },
+    {
+      "id": "docs-office",
+      "name": "Docs / Office",
+      "slot": "docs",
+      "category": "reach",
+      "origin": "community",
+      "maturity": "community",
+      "color": "#2C5282",
+      "studs": [2, 1],
+      "summary": "Parse office documents for the agent.",
+      "install": { "kind": "npm", "package": "pi-docparser", "command": "pi install npm:pi-docparser" },
+      "settingsFragment": { "packages": ["npm:pi-docparser"] }
+    },
+    {
+      "id": "computer-use",
+      "name": "Computer Use",
+      "slot": "desktop",
+      "category": "reach",
+      "origin": "omp",
+      "maturity": "partial",
+      "color": "#C53030",
+      "studs": [2, 2],
+      "summary": "Host desktop screenshot + confirmed input. Not a browser DOM.",
+      "install": {
+        "kind": "local-extension",
+        "command": "mkdir -p .pi/extensions && cp packages/recipes/computer-use/index.ts .pi/extensions/computer-use.ts",
+        "recipe": "packages/recipes/computer-use"
+      },
+      "files": ["packages/recipes/computer-use/index.ts"],
+      "conflicts": ["browser"],
+      "settingsFragment": { "extensions": [".pi/extensions/computer-use.ts"] }
+    },
+    {
+      "id": "memory-local",
+      "name": "Local Memory",
+      "slot": "memory",
+      "category": "memory",
+      "origin": "community",
+      "maturity": "community",
+      "color": "#B83280",
+      "studs": [2, 1],
+      "summary": "Retain / recall across sessions.",
+      "install": { "kind": "npm", "package": "pi-memory", "command": "pi install npm:pi-memory" },
+      "settingsFragment": { "packages": ["npm:pi-memory"] }
+    },
+    {
+      "id": "background-tasks",
+      "name": "Background Tasks",
+      "slot": "jobs",
+      "category": "memory",
+      "origin": "community",
+      "maturity": "community",
+      "color": "#744210",
+      "studs": [2, 1],
+      "summary": "Durable background shells and delegated runs.",
+      "install": { "kind": "npm", "package": "pi-background-tasks", "command": "pi install npm:pi-background-tasks" },
+      "settingsFragment": { "packages": ["npm:pi-background-tasks"] }
+    },
+    {
+      "id": "permission-gate",
+      "name": "Permission Gate",
+      "slot": "permissions",
+      "category": "guard",
+      "origin": "community",
+      "maturity": "community",
+      "color": "#C05621",
+      "studs": [2, 1],
+      "summary": "Approval vocabulary for dangerous tools.",
+      "install": { "kind": "npm", "package": "@gotgenes/pi-permission-system", "command": "pi install npm:@gotgenes/pi-permission-system" },
+      "settingsFragment": {
+        "packages": ["npm:@gotgenes/pi-permission-system"],
+        "defaultProjectTrust": "ask"
+      }
+    },
+    {
+      "id": "sandbox",
+      "name": "Sandbox",
+      "slot": "sandbox",
+      "category": "guard",
+      "origin": "community",
+      "maturity": "community",
+      "color": "#276749",
+      "studs": [2, 1],
+      "summary": "Worktree isolation for agent writes.",
+      "install": { "kind": "npm", "package": "@sysid/pi-sandbox-extended", "command": "pi install npm:@sysid/pi-sandbox-extended" },
+      "settingsFragment": { "packages": ["npm:@sysid/pi-sandbox-extended"] }
+    },
+    {
+      "id": "powerline",
+      "name": "Powerline",
+      "slot": "statusline",
+      "category": "surface",
+      "origin": "community",
+      "maturity": "community",
+      "color": "#4C1D95",
+      "studs": [4, 1],
+      "summary": "Status footer for the TUI.",
+      "install": { "kind": "npm", "package": "pi-powerline-footer", "command": "pi install npm:pi-powerline-footer" },
+      "settingsFragment": { "packages": ["npm:pi-powerline-footer"] }
+    },
+    {
+      "id": "rule-compat",
+      "name": "Rule Compat",
+      "slot": "rules",
+      "category": "surface",
+      "origin": "omp",
+      "maturity": "local-extension",
+      "color": "#4A5568",
+      "studs": [2, 1],
+      "summary": "Import AGENTS.md / CLAUDE.md style rules into Pi prompts.",
+      "install": { "kind": "local-extension", "command": "write .pi/extensions/rule-compat.ts" },
+      "settingsFragment": { "extensions": [".pi/extensions/rule-compat.ts"], "prompts": [".pi/prompts"] }
+    },
+    {
+      "id": "role-routing",
+      "name": "Role Routing",
+      "slot": "routing",
+      "category": "surface",
+      "origin": "omp",
+      "maturity": "settings",
+      "color": "#2A4365",
+      "studs": [2, 1],
+      "summary": "Map planner / coder / reviewer roles onto models.json entries.",
+      "install": { "kind": "settings", "command": "merge role map into .pi/settings.json" },
+      "settingsFragment": {
+        "defaultThinkingLevel": "medium",
+        "modelThinkingLevels": {}
+      }
+    }
+  ]
+}
