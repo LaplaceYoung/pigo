@@ -1,0 +1,40 @@
+{
+  "version": "0.3.0",
+  "presets": [
+    {
+      "id": "daily-refactor",
+      "name": "Daily refactor",
+      "nameZh": "日常重构",
+      "intent": "日常 TypeScript / Python 重构：要 LSP、稳编辑、能查文档，并挡住危险命令。",
+      "bricks": ["hashline-edit", "lsp-lens", "web-access", "mcp-adapter", "review", "permission-gate"]
+    },
+    {
+      "id": "research",
+      "name": "Research scout",
+      "nameZh": "调研侦察",
+      "intent": "先搜官方文档再动手。要 web、MCP、文档解析、计划和跨会话记忆。",
+      "bricks": ["web-access", "mcp-adapter", "docs-office", "plan-goal", "memory-local"]
+    },
+    {
+      "id": "debug-lab",
+      "name": "Debug lab",
+      "nameZh": "调试台",
+      "intent": "本地 Python/TS 调试：真实 DAP、持久内核、进程内搜索和 LSP。",
+      "bricks": ["dap-debug", "eval-kernel", "native-search", "lsp-lens"]
+    },
+    {
+      "id": "desktop-ops",
+      "name": "Desktop ops",
+      "nameZh": "桌面操作",
+      "intent": "受守卫的桌面控制，加上权限门、沙箱和后台任务。",
+      "bricks": ["computer-use", "permission-gate", "sandbox", "background-tasks"]
+    },
+    {
+      "id": "team-review",
+      "name": "Team review",
+      "nameZh": "团队审查",
+      "intent": "把 GitHub PR 当文件读，跑优先级审查，必要时派子代理，先计划再改。",
+      "bricks": ["github-fs", "review", "subagents", "plan-goal", "permission-gate"]
+    }
+  ]
+}

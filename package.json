@@ -1,0 +1,11 @@
+{
+  "name": "pigo",
+  "version": "0.3.0",
+  "private": true,
+  "type": "module",
+  "description": "Keep the plate. Pick the bricks. Print the build.",
+  "scripts": {
+    "test": "node packages/composer/compose.test.js",
+    "serve": "python3 -m http.server 4173 --directory apps/web"
+  }
+}
