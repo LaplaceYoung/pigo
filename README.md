@@ -3,7 +3,7 @@
 **Keep the plate. Pick the bricks. Print the build.**
 
 Pigo is a visual assembly bench for [Pi](https://github.com/earendil-works/pi).
-It is the Pi-world sister of [oh-my-dsh](https://github.com/LaplaceYoung/oh-my-dsh) and the blueprint cousin of [pixelcraft](https://github.com/LaplaceYoung/pixelcraft).
+
 
 - The plate is always official Pi. `read` / `write` / `edit` / `bash` stay put.
 - Bricks are Oh My Pi capabilities split into slots, plus curated `pi-package` community modules.
