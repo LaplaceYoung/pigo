@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="pigo">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1C1915"/>
+      <stop offset="100%" stop-color="#12110F"/>
+    </linearGradient>
+    <linearGradient id="plateTop" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#EBD7B6"/>
+      <stop offset="100%" stop-color="#D4BC96"/>
+    </linearGradient>
+    <linearGradient id="plateSide" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#C4A87A"/>
+      <stop offset="100%" stop-color="#8E734C"/>
+    </linearGradient>
+    <linearGradient id="brickFront" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E24A2B"/>
+      <stop offset="100%" stop-color="#B32614"/>
+    </linearGradient>
+    <linearGradient id="brickTop" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#F06A4A"/>
+      <stop offset="100%" stop-color="#D13C22"/>
+    </linearGradient>
+    <linearGradient id="stud" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FF8A6A"/>
+      <stop offset="100%" stop-color="#C8331A"/>
+    </linearGradient>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="18" stdDeviation="16" flood-color="#000" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <rect width="512" height="512" rx="96" fill="url(#bg)"/>
+
+  <g filter="url(#soft)">
+    <!-- plate -->
+    <rect x="86" y="318" width="340" height="86" rx="18" fill="url(#plateTop)"/>
+    <rect x="86" y="392" width="340" height="28" rx="8" fill="url(#plateSide)"/>
+    <circle cx="148" cy="348" r="16" fill="#F3E2C4"/>
+    <circle cx="212" cy="348" r="16" fill="#F3E2C4"/>
+    <circle cx="276" cy="348" r="16" fill="#F3E2C4"/>
+    <circle cx="340" cy="348" r="16" fill="#F3E2C4"/>
+    <circle cx="404" cy="348" r="16" fill="#F3E2C4"/>
+
+    <!-- 2x2 brick -->
+    <rect x="156" y="146" width="200" height="168" rx="18" fill="url(#brickFront)"/>
+    <rect x="156" y="132" width="200" height="36" rx="12" fill="url(#brickTop)"/>
+    <rect x="356" y="146" width="22" height="168" rx="8" fill="#8E1C10"/>
+
+    <!-- studs -->
+    <g>
+      <ellipse cx="216" cy="124" rx="28" ry="14" fill="#9A1A10"/>
+      <ellipse cx="296" cy="124" rx="28" ry="14" fill="#9A1A10"/>
+      <rect x="188" y="86" width="56" height="42" rx="18" fill="url(#stud)"/>
+      <rect x="268" y="86" width="56" height="42" rx="18" fill="url(#stud)"/>
+      <ellipse cx="216" cy="86" rx="28" ry="13" fill="#FFB197"/>
+      <ellipse cx="296" cy="86" rx="28" ry="13" fill="#FFB197"/>
+      <ellipse cx="216" cy="82" rx="10" ry="5" fill="#FFE1D6" opacity="0.7"/>
+      <ellipse cx="296" cy="82" rx="10" ry="5" fill="#FFE1D6" opacity="0.7"/>
+    </g>
+
+    <!-- pi glyph -->
+    <text x="256" y="268" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="118" font-weight="700" fill="#F7E7D6">π</text>
+  </g>
+
+  <text x="256" y="456" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="28" letter-spacing="8" fill="#D7C4A3">PIGO</text>
+</svg>
