@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.4.1 — overlay crate + Pages bench
+
+- Community bricks live in `data/bricks.community.json` and merge onto the OMP-split ledger at boot.
+- Composer tests cover session-kit vs todo/review, browser vs agent-browser, and the two new presets.
+- Bench JS (`main.js`, `scene.js`, `compose.js`) is the Pages runtime.
+
 ## 0.4.0 — community crate
 
 - Curated 12 community bricks from the live Pi package catalog and GitHub extension monorepos.
